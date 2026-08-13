@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'goal_server = turtle_action_practice.goal_server:main',
         ],
     },
 )
