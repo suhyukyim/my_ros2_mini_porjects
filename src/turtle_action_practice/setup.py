@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'goal_server = turtle_action_practice.goal_server:main',
+            'goal_client = turtle_action_practice.goal_client:main',
         ],
     },
 )
