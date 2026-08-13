@@ -18,7 +18,7 @@ ROS2(Humble) turtlesim으로 하나씩 익혀가는 미니 프로젝트 모음. 
 | 7 | `game_referee.py` | 잡기 판정 / 점수 / 리스폰 | [docs/07_game_referee.md](docs/07_game_referee.md) |
 | 8 | `launch/game.launch.py` | 게임 한 번에 실행 (launch 파일) | [docs/08_game_launch.md](docs/08_game_launch.md) |
 
-1~5는 구현 완료. 6~8(Phase B, 멀티 거북이 게임 캡스톤)은 노드 클래스/함수 스켈레톤 + `main()` 보일러플레이트만 있고 핵심 로직은 TODO 상태.
+1~8 모두 구현 완료 (Phase B, 멀티 거북이 게임 캡스톤 완결). `custom_teleop`은 launch로 띄운 4번 `custom_teleop.py`와 별개로, `game.launch.py` 실행 시엔 표준입력 문제로 launch에 포함되지 않으므로 별도 터미널에서 `ros2 run turtlesim_projects custom_teleop`로 직접 실행 필요.
 
 ## 빌드 & 실행
 
