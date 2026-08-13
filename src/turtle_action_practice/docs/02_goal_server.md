@@ -7,10 +7,14 @@
 ## 익힐 개념
 - `ActionServer(node, action_type, action_name, execute_callback, cancel_callback)` 로
   액션 서버를 등록하는 방법.
-- `execute_callback`은 `create_timer` 콜백과 다르게 액션 실행 전용 스레드에서 동작하므로,
-  콜백 안에서 블로킹 루프(`while`)를 직접 돌려도 executor 전체가 멈추지 않는다 —
-  waypoint_nav.py에서 배운 "타이머 콜백에 while 넣으면 안 된다"는 제약이 왜 여기선
-  다르게 적용되는지 이해하기.
+- `execute_callback`이라고 저절로 블로킹이 안전해지는 게 아니라는 점. 기본값
+  (`rclpy.spin(node)` = 싱글스레드 executor + 기본 MutuallyExclusive 콜백그룹)에서
+  콜백 안에 `while`을 넣으면 노드 전체가 멈춘다 — pose 구독도, 취소 처리도 안 돈다.
+  waypoint_nav.py의 "타이머 콜백에 while 넣으면 안 된다"와 같은 얘기.
+- 그래서 이 파일의 `main()`은 `MultiThreadedExecutor`로 스핀하고, 구독과 `ActionServer`에
+  같은 `ReentrantCallbackGroup`을 물려놨다. 이 조합 **덕분에** `execute_callback` 안에서
+  블로킹 루프를 돌려도 pose 구독과 취소 확인이 동시에 계속 돌아간다. Nav2 같은 실제
+  액션 서버들이 쓰는 executor 패턴이 바로 이것.
 - `goal_handle.publish_feedback(...)`으로 진행 중 상태를 클라이언트에 계속 보고.
 - `goal_handle.is_cancel_requested` 확인 → `goal_handle.canceled()` → `Result(success=False, ...)`
   반환하는 취소 처리 흐름.
@@ -35,4 +39,3 @@ ros2 run turtle_action_practice goal_server
 ```
 확인: 다른 터미널에서 `ros2 action list`에 `/move_to_goal`이 뜨는지,
 `ros2 action info /move_to_goal -t`로 타입이 `turtle_action_interfaces/action/MoveToGoal`인지 확인.
-```
