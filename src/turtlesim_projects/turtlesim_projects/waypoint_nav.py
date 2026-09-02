@@ -58,7 +58,7 @@ class WaypointNav(Node):
                 self.index +=1 
                 if not self.index - self.length: #범위 넘었을 때
                     self.finished = True
-                    twist = Twist(0,0)
+                    twist = Twist()
                 else:
                     return
                                 
