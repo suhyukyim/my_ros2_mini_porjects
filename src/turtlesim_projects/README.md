@@ -24,7 +24,7 @@ ROS2(Humble) turtlesim으로 하나씩 익혀가는 미니 프로젝트 모음. 
 
 ```bash
 # 워크스페이스 루트에서
-cd ~/ros2_portfolio/mini_project
+cd ~/ros2/ros2_portfolio/mini_project
 colcon build --packages-select turtlesim_projects
 source install/setup.bash
 
@@ -42,7 +42,7 @@ ros2 run turtlesim_projects draw_shape_time
 이 패키지의 `package.xml`/`setup.py`/`setup.cfg`/`resource/`는 처음엔 직접 손으로 작성했지만, 원래 표준 방법은 `ros2 pkg create` 명령어를 쓰는 것.
 
 ```bash
-cd ~/ros2_portfolio/mini_project/src
+cd ~/ros2/ros2_portfolio/mini_project/src
 ros2 pkg create --build-type ament_python turtlesim_projects \
   --dependencies rclpy turtlesim geometry_msgs
 ```
