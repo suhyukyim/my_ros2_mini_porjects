@@ -22,7 +22,7 @@ ROS2(Jazzy) 액션(action) 통신 패턴을 turtlesim으로 익히는 미니 프
 
 ```bash
 # 워크스페이스 루트에서
-cd ~/ros2_workspaces/mini_project
+cd ~/ros2_portfolio/mini_project
 colcon build --packages-select turtle_action_interfaces turtle_action_practice
 source install/setup.bash
 
